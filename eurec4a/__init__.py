@@ -22,6 +22,11 @@ github = GithubApi()
 
 
 def get_flight_segments(version="latest"):
+    """
+    Download and parse flight segmentation information.
+
+    :param version: optional version (git-tag) of the flight segmentation release
+    """
     if version == "latest":
         release_info = github.get(f"repos/{SEGMENT_REPO}/releases/latest")
     else:
@@ -35,11 +40,21 @@ def get_flight_segments(version="latest"):
 
 
 def get_meta():
+    """
+    Download and parse general campaign metadata.
+    This includes information about platforms, instruments, people, data access etc.
+    """
     return yaml.load(requests.get("https://eurec4a_staging.pages.gwdg.de/eurec4a_meta/meta.yaml").content,
                      Loader=yaml.SafeLoader)
 
 
 def get_intake_catalog():
+    """
+    Open the intake data catalog.
+
+    The catalog provides access to public EUREC4A datasets without the need to
+    manually specify URLs to the individual datasets.
+    """
     return intake.open_catalog("https://raw.githubusercontent.com/eurec4a/eurec4a-intake/master/catalog.yml")
 
 
