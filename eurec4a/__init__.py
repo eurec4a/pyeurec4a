@@ -37,3 +37,7 @@ def get_meta():
 
 
 __all__ = ["get_flight_segments", "get_meta"]
+
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
