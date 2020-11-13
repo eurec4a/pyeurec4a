@@ -11,7 +11,6 @@ SEGMENT_REPO = "eurec4a/flight-phase-separation"
 class GithubApi:
     def get(self, endpoint):
         url = "https://api.github.com/" + endpoint
-        print(url)
         return requests.get(url,
                             headers={
                                 "Accept": "application/vnd.github.v3+json",
@@ -26,7 +25,6 @@ def get_flight_segments(version="latest"):
         release_info = github.get(f"repos/{SEGMENT_REPO}/releases/latest")
     else:
         release_info = github.get(f"repos/{SEGMENT_REPO}/releases/tags/{version}")
-    print(release_info)
     all_flights_asset = [a
                          for a in release_info["assets"]
                          if a["name"] == "all_flights.yaml"][0]
