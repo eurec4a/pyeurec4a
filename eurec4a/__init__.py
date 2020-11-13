@@ -1,6 +1,10 @@
 import requests
 import yaml
 
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
+
 SEGMENT_REPO = "eurec4a/flight-phase-separation"
 
 
@@ -36,8 +40,4 @@ def get_meta():
                      Loader=yaml.SafeLoader)
 
 
-__all__ = ["get_flight_segments", "get_meta"]
-
-from ._version import get_versions
-__version__ = get_versions()['version']
-del get_versions
+__all__ = ["get_flight_segments", "get_meta", "__version__"]
