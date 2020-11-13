@@ -26,5 +26,6 @@ setuptools.setup(
         "requests",
         "pyyaml",
         "intake",
+        "aiohttp",
     ],
 )
