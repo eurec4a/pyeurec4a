@@ -1,3 +1,4 @@
+import intake
 import requests
 import yaml
 
@@ -38,4 +39,11 @@ def get_meta():
                      Loader=yaml.SafeLoader)
 
 
-__all__ = ["get_flight_segments", "get_meta", "__version__"]
+def get_intake_catalog():
+    return intake.open_catalog("https://raw.githubusercontent.com/eurec4a/eurec4a-intake/master/catalog.yml")
+
+
+__all__ = ["get_flight_segments",
+           "get_meta",
+           "get_intake_catalog",
+           "__version__"]
