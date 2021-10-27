@@ -48,14 +48,18 @@ def get_meta():
                      Loader=yaml.SafeLoader)
 
 
-def get_intake_catalog():
+def get_intake_catalog(use_ipfs=False):
     """
     Open the intake data catalog.
 
     The catalog provides access to public EUREC4A datasets without the need to
     manually specify URLs to the individual datasets.
     """
-    return intake.open_catalog("https://raw.githubusercontent.com/eurec4a/eurec4a-intake/master/catalog.yml")
+    if use_ipfs:
+        cids = requests.get("https://raw.githubusercontent.com/eurec4a/ipfs_tools/main/cids.json").json()
+        return intake.open_catalog(f"ipfs://{cids['intake']['latest']}/catalog.yml")
+    else:
+        return intake.open_catalog("https://raw.githubusercontent.com/eurec4a/eurec4a-intake/master/catalog.yml")
 
 
 __all__ = ["get_flight_segments",
