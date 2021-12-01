@@ -1,3 +1,4 @@
+from functools import lru_cache
 import intake
 import requests
 import yaml
@@ -48,6 +49,11 @@ def get_meta():
                      Loader=yaml.SafeLoader)
 
 
+@lru_cache
+def get_cids():
+    return requests.get("https://raw.githubusercontent.com/eurec4a/ipfs_tools/main/cids.json").json()
+
+
 def get_intake_catalog(use_ipfs=False):
     """
     Open the intake data catalog.
@@ -56,8 +62,11 @@ def get_intake_catalog(use_ipfs=False):
     manually specify URLs to the individual datasets.
     """
     if use_ipfs:
-        cids = requests.get("https://raw.githubusercontent.com/eurec4a/ipfs_tools/main/cids.json").json()
-        return intake.open_catalog(f"ipfs://{cids['intake']['latest']}/catalog.yml")
+        if isinstance(use_ipfs, str):
+            cid = use_ipfs
+        else:
+            cid = get_cids()['intake']['latest']
+        return intake.open_catalog(f"ipfs://{cid}/catalog.yml")
     else:
         return intake.open_catalog("https://raw.githubusercontent.com/eurec4a/eurec4a-intake/master/catalog.yml")
 
