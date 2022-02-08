@@ -49,7 +49,7 @@ def get_meta():
                      Loader=yaml.SafeLoader)
 
 
-@lru_cache
+@lru_cache()
 def get_cids():
     return requests.get("https://raw.githubusercontent.com/eurec4a/ipfs_tools/main/cids.json").json()
 
