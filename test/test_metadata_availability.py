@@ -19,3 +19,8 @@ def test_meta_availability():
 def test_inake_catalog_availability():
     cat = eurec4a.get_intake_catalog()
     assert "barbados" in cat
+
+
+def test_ipfs_inake_catalog_availability():
+    cat = eurec4a.get_intake_catalog(use_ipfs=True)
+    assert "radiosondes" in cat
