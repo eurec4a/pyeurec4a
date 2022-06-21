@@ -27,5 +27,6 @@ setuptools.setup(
         "pyyaml",
         "intake!=0.6.1",  # due to lacking jinja2 dependency
         "aiohttp",  # required by intake to access catalogs via http
+        "ipfsspec",
     ],
 )
