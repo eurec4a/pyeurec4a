@@ -43,16 +43,6 @@ def get_flight_segments(version="latest"):
 
 
 @lru_cache()
-def get_meta():
-    """
-    Download and parse general campaign metadata.
-    This includes information about platforms, instruments, people, data access etc.
-    """
-    return yaml.load(requests.get("https://eurec4a_staging.pages.gwdg.de/eurec4a_meta/meta.yaml").content,
-                     Loader=yaml.SafeLoader)
-
-
-@lru_cache()
 def get_cids():
     return requests.get("https://raw.githubusercontent.com/eurec4a/ipfs_tools/main/cids.json").json()
 

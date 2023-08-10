@@ -19,15 +19,6 @@ In [3]: flightinfo["HALO"]["HALO-0119"]["takeoff"]
 Out[3]: datetime.datetime(2020, 1, 19, 9, 34, 25)
 ```
 
-### obtaining general campaign metadata
-
-```ipython
-In [4]: meta = eurec4a.get_meta()
-
-In [5]: meta["ATR42"]["color"]
-Out[5]: '#f7c96b'
-```
-
 ### accessing public datasets via the intake data catalog
 
 ```ipython
