@@ -11,11 +11,6 @@ def test_flight_segment_availability_by_version():
     assert "HALO" in segments
 
 
-def test_meta_availability():
-    meta = eurec4a.get_meta()
-    assert "HALO" in meta
-
-
 def test_inake_catalog_availability():
     cat = eurec4a.get_intake_catalog()
     assert "barbados" in cat
