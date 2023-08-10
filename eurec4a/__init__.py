@@ -11,6 +11,7 @@ SEGMENT_REPO = "eurec4a/flight-phase-separation"
 
 
 class GithubApi:
+    @lru_cache()
     def get(self, endpoint):
         url = "https://api.github.com/" + endpoint
         return requests.get(url,
@@ -22,6 +23,7 @@ class GithubApi:
 github = GithubApi()
 
 
+@lru_cache()
 def get_flight_segments(version="latest"):
     """
     Download and parse flight segmentation information.
@@ -40,6 +42,7 @@ def get_flight_segments(version="latest"):
     return yaml.load(requests.get(all_flights_url).content, Loader=yaml.SafeLoader)
 
 
+@lru_cache()
 def get_meta():
     """
     Download and parse general campaign metadata.
