@@ -1,1 +1,4 @@
 __pycache__
+/eurec4a/_version.py
+*.egg-info
+/dist

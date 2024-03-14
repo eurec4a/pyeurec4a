@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eurec4a"
+authors = [
+    {name = "Tobias Kölling", email = "tobias.koelling@mpimet.mpg.de"},
+]
+description = "common utilities for analysing data from the EUREC4A field campaign"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "requests",
+    "pyyaml",
+    "intake!=0.6.1,<2.0.0",  # due to lacking jinja2 dependency
+    "aiohttp",  # required by intake to access catalogs via http
+    "fsspec>=0.7.4",
+    "ipfsspec",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+data = [
+    # the most recent version of intake-xarray (v3.2.2) only supports the OPeNDAP
+    # servers by URS and ESGF, the fork bellow allows for connecting to general OPeNDAP servers
+    "xarray",
+    "zarr",
+    "netcdf4!=1.5.4,!=1.5.5,!=1.5.5.1,!=1.6.0,!=1.6.1,!=1.6.2,!=1.6.3,!=1.6.4", # this is due to https://github.com/Unidata/netcdf4-python/issues/1052 and a CURL error in 1.6.0 (https://github.com/Unidata/netcdf-c/issues/2459) and https://github.com/eurec4a/eurec4a-intake/issues/121
+    "s3fs",
+    "requests",
+    "intake-xarray>=0.3.2",
+]
+
+[tool.setuptools_scm]
+version_file = "eurec4a/_version.py"
