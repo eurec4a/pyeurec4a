@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eurec4a"
+authors = [
+    {name = "Tobias Kölling", email = "tobias.koelling@mpimet.mpg.de"},
+]
+description = "common utilities for analysing data from the EUREC4A field campaign"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "requests",
+    "pyyaml",
+    "intake!=0.6.1",  # due to lacking jinja2 dependency
+    "aiohttp",  # required by intake to access catalogs via http
+    "ipfsspec",
+]
+dynamic = ["version"]
+
+[tool.setuptools_scm]
+version_file = "eurec4a/_version.py"
